@@ -13,24 +13,43 @@
 // }
 // console.log(fibonacci(6))
 
-// function binary(arr,val){
-//     let left = 0;
-//     let right = arr.length-1;
+
+// function binary(a, b){
+//     let left= 0;
+//     let right = a.length-1;
 //     while(left<=right){
 //         let mid = Math.floor((left+right)/2);
-//         if(arr[mid]===val){
+//         if(a[mid]===b){
 //             return mid
-//         }else if(arr[mid]<val){
+//         }else if(a[mid]<b){
 //             left = mid+1
-//         }else right = mid-1
+//         }else {
+//             right = mid-1;
+//         }
 //     }return -1
 // }
-// let arr = [1,2,3,4,5]
-// console.log(binary(arr,3))
+// let a = [1,2,3,4,5]
+// console.log(binary(a,4))
 
-function sum (arr){
-    if(arr.length ==0)return 0;
-    return arr[0]+sum(arr.slice(1))
-}
-let arr = [1,2,3,4,5]
-console.log(sum(arr))
+// function sum(a){
+//     if(a.length == 0)return 0
+//     return a[0] + sum(a.slice(1)) 
+// }
+// let a = [1,2,3,4,5]
+// console.log(sum(a))
+
+// function binary(a,b,left = 0 , right = a.length-1){
+//     if (left > right){
+//         return -1
+//     }
+//     let mid = Math.floor((left+right)/2)
+//     if(a[mid]===b){
+//         return mid;
+//     }else if(a[mid]<b){
+//         return binary(a,b,mid+1,right)
+//     }else {
+//         return binary(a,b,left,mid+1)
+//     }
+// }
+// let a = [1,2,3,4,5]
+// console.log(binary(a,3))
