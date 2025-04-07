@@ -55,21 +55,40 @@
 // console.log(binary(a,3))
 
 
-const abc = [
-    { af: [3, 4, 4] },
-    { adf: [3, 4, 4] },
-    { afd: [3, 4, 4] },
-    { daldf: [3, 4, 4] }
-];
-let sum = 0;
-function add(arr,index =0){
-    if(index >= arr.length)return;
-    let obj = arr[index];
-    for(let key in obj){
-        sum += obj[key].reduce((a,b)=>a+b,0)
-        obj[key].fill(0)
-    }
-    add(arr,index + 1)
-}
-add(abc)
-console.log(sum)
+// const abc = [
+//     { af: [3, 4, 4] },
+//     { adf: [3, 4, 4] },
+//     { afd: [3, 4, 4] },
+//     { daldf: [3, 4, 4] }
+// ];
+// let sum = 0;
+// function add(arr,index =0){
+//     if(index >= arr.length)return;
+//     let obj = arr[index];
+//     for(let key in obj){
+//         sum += obj[key].reduce((a,b)=>a+b,0)
+//         obj[key].fill(0)
+//     }
+//     add(arr,index + 1)
+// }
+// add(abc)
+// console.log(sum)
+
+// let nums = [5,2,6,1]
+// let arr = [];
+// let sor = []
+// function binary(target){
+//     let left = 0, right = sor.length;
+//     while(left<right){
+//         let mid = Math.floor((left+right)/2);
+//         if(sor[mid]<target){
+//             left = mid+1
+//         }else right = mid;
+//     }return left;
+// }
+// for(let i=nums.length-1;i>=0;i--){
+//     let a = binary(nums[i]);
+//     arr.push(a);
+//     sor.splice(a,0,nums[i])
+// }
+// console.log(arr.reverse())
