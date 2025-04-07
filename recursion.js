@@ -93,11 +93,24 @@
 // }
 // console.log(arr.reverse())
 
-let a = "A man a plan a canal Panama"
-let b = a.replace(/ /g,"").toLowerCase()
-function pali(a,s=0,e=a.length-1){
-    if(s>=e) return true;
-    if(a[s]!=a[e]) return false;
-    return pali(a,s+1,e-1)
+// let a = "A man a plan a canal Panama"
+// let b = a.replace(/ /g,"").toLowerCase()
+// function pali(a,s=0,e=a.length-1){
+//     if(s>=e) return true;
+//     if(a[s]!=a[e]) return false;
+//     return pali(a,s+1,e-1)
+// }
+// console.log(pali(b))
+
+let l1=[1,3,4]
+let l2 = [1,2,4]
+function merge(l1,l2){
+    if(l1.length==0)return l2;
+    if(l2.length==0)return l1;
+    if(l1[0]<l2[0]){
+        return [l1[0],...merge(l1.slice(1),l2)]
+    }else {
+        return [l2[0],...merge(l1,l2.slice(1))]
+    }
 }
-console.log(pali(b))
+console.log(merge(l1,l2))
