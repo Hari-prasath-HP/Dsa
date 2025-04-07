@@ -102,15 +102,15 @@
 // }
 // console.log(pali(b))
 
-let l1=[1,3,4]
-let l2 = [1,2,4]
-function merge(l1,l2){
-    if(l1.length==0)return l2;
-    if(l2.length==0)return l1;
-    if(l1[0]<l2[0]){
-        return [l1[0],...merge(l1.slice(1),l2)]
-    }else {
-        return [l2[0],...merge(l1,l2.slice(1))]
+let l1=[1,3,4,8]
+let l2 = [1,4,9]
+    function merge(l1,l2){
+        if(l1.length==0)return l2;
+        if(l2.length==0)return l1;
+        if(l1[0]<l2[0]){
+            return [l1[0],...merge(l1.slice(1),l2)]
+        }else {
+            return [l2[0],...merge(l1,l2.slice(1))]
+        }
     }
-}
 console.log(merge(l1,l2))
