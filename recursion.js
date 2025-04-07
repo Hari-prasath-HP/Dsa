@@ -92,3 +92,12 @@
 //     sor.splice(a,0,nums[i])
 // }
 // console.log(arr.reverse())
+
+let a = "A man a plan a canal Panama"
+let b = a.replace(/ /g,"").toLowerCase()
+function pali(a,s=0,e=a.length-1){
+    if(s>=e) return true;
+    if(a[s]!=a[e]) return false;
+    return pali(a,s+1,e-1)
+}
+console.log(pali(b))
