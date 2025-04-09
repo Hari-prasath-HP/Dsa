@@ -38,21 +38,21 @@
 // let a = [1,2,3,4,5]
 // console.log(sum(a))
 
-// function binary(a,b,left = 0 , right = a.length-1){
-//     if (left > right){
-//         return -1
-//     }
-//     let mid = Math.floor((left+right)/2)
-//     if(a[mid]===b){
-//         return mid;
-//     }else if(a[mid]<b){
-//         return binary(a,b,mid+1,right)
-//     }else {
-//         return binary(a,b,left,mid+1)
-//     }
-// }
-// let a = [1,2,3,4,5]
-// console.log(binary(a,3))
+function binary(a,b,left = 0 , right = a.length-1){
+    if (left > right){
+        return -1
+    }
+    let mid = Math.floor((left+right)/2)
+    if(a[mid]===b){
+        return mid;
+    }else if(a[mid]<b){
+        return binary(a,b,mid+1,right)
+    }else {
+        return binary(a,b,left,mid-1)
+    }
+}
+let a = [1,2,3,4,5]
+console.log(binary(a,7))
 
 
 // const abc = [
@@ -102,15 +102,15 @@
 // }
 // console.log(pali(b))
 
-let l1=[1,3,4,8]
-let l2 = [1,4,9]
-    function merge(l1,l2){
-        if(l1.length==0)return l2;
-        if(l2.length==0)return l1;
-        if(l1[0]<l2[0]){
-            return [l1[0],...merge(l1.slice(1),l2)]
-        }else {
-            return [l2[0],...merge(l1,l2.slice(1))]
-        }
-    }
-console.log(merge(l1,l2))
+// let l1=[1,3,4,8]
+// let l2 = [1,4,9]
+//     function merge(l1,l2){
+//         if(l1.length==0)return l2;
+//         if(l2.length==0)return l1;
+//         if(l1[0]<l2[0]){
+//             return [l1[0],...merge(l1.slice(1),l2)]
+//         }else {
+//             return [l2[0],...merge(l1,l2.slice(1))]
+//         }
+//     }
+// console.log(merge(l1,l2))
