@@ -44,6 +44,7 @@ function binary(a,b,left = 0 , right = a.length-1){
     }
     let mid = Math.floor((left+right)/2)
     if(a[mid]===b){
+        a[mid] = 0
         return mid;
     }else if(a[mid]<b){
         return binary(a,b,mid+1,right)
@@ -52,7 +53,8 @@ function binary(a,b,left = 0 , right = a.length-1){
     }
 }
 let a = [1,2,3,4,5]
-console.log(binary(a,7))
+let index = binary(a,3)
+console.log(a)
 
 
 // const abc = [

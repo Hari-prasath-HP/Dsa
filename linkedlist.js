@@ -23,11 +23,11 @@
 //     }
 // }
 // let ll = new Ll()
-// ll.append(10)
-// ll.append(20)
-// ll.append(30)
-// ll.append(40)
-// console.log(ll)
+// let arr = [1,2,3,4]
+// for(let i=0;i<arr.length;i++){
+//     ll.append(arr[i])
+// }
+// console.log(JSON.stringify(ll))
 
 // class LL {
 //     constructor (){
@@ -217,16 +217,6 @@
     //             }
     //             this.head = newnode
     //         }
-    //         print(){
-    //             let temp = this.head;
-    //             let res = []
-    //             while(temp){
-    //                 res.push(temp.data)
-    //                 temp = temp.next
-    //             }
-    //             console.log(res.join("-"))
-    //         }
-            
     //     }
     //     let ll = new LL()
     //     ll.prepend(10)
@@ -234,8 +224,7 @@
     //     ll.prepend(30)
     //     ll.prepend(40)
     //     ll.prepend(50)
-    //     // console.log(JSON.stringify(ll))
-    //     ll.print()
+    //     console.log(JSON.stringify(ll))
 
     // Sort the linklist
     // class Node {
@@ -315,43 +304,27 @@ class Linkedlist{
             this.head = node;
             this.tail = node;
         }else{
-            node.next = this.head;
-            this.head = node;
+            this.tail.next = node;
+            this.tail = node
         }
         this.size ++
     }
-    middle(){
-        let mid = this.head;
-        let i=0;
-        while(mid){
-            i++;
-            mid = mid.next;
-        }
-        let curr = Math.floor(i/2);
-        let mid1 = this.head;
-        let i1 =0;
-        while(mid1){
-            if(i1 == curr-1 && mid1.next){
-                mid1.next = mid1.next.next;
-                this.size --;
-                return;
-            }i1++;
-            mid1 = mid1.next;
-        }
-    }
-    arr(){
+    reverse(){
+        let newnode = null;
         let curr = this.head;
-        let res = [];
+        this.tail = curr;
         while(curr){
-            res.push(curr.data);
-            curr = curr.next;
-        }return res
+            let nextnode = curr.next;
+            curr.next = newnode;
+            newnode = curr;
+            curr = nextnode
+        }this.head = newnode
     }
 }
 let ll = new Linkedlist()
 ll.append(10)
 ll.append(20)
 ll.append(30)
-ll.middle()
+ll.reverse()
 console.log(JSON.stringify(ll.head,null,2))
-console.log(ll.arr());
+
