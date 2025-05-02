@@ -1,8 +1,8 @@
 function bubble(num){
     let swapped;
     do{
+        swapped = false;
         for(let i=0;i<num.length-1;i++){
-            swapped = false;
             if(num[i] > num[i+1]){
                 let temp = num[i]
                 num[i] = num[i+1]

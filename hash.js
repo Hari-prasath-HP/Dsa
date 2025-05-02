@@ -45,7 +45,5 @@ console.log(table.get("Qualification"))
 
 table.remove("age")
 table.display()
-.Array
-
 
 

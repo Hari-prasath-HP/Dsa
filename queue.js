@@ -21,7 +21,7 @@ class Queue{
         return null
     }
 
-    sixe(){
+    size(){
         return this.item.length
     }
 
