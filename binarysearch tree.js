@@ -77,6 +77,11 @@ class Binarysearchtree{
             console.log(root.value)
         }
     }
+
+    sum(root){
+        if(!root)return 0
+        return root.value + this.sum(root.left) + this.sum(root.right)
+    }
 }
 
 const bst = new Binarysearchtree()
@@ -91,5 +96,7 @@ bst.insert(3)
 console.log(bst.search(bst.root,10))
 console.log(bst.search(bst.root,5))
 console.log(bst.search(bst.root,15))
-
+bst.proorder(bst.root)
+bst.inorder(bst.root)
 bst.postorder(bst.root)
+console.log(bst.sum(bst.root))
