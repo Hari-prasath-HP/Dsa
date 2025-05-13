@@ -21,7 +21,7 @@ class Trie {
     current.isEndOfWord = true;
   }
 
-  search(word) {
+  search(word) {                                                  
     let current = this.root;
     for (let char of word) {
       if (!current.children[char]) {
