@@ -52,4 +52,4 @@ trie.insert("cap");
 console.log(trie.search("cat"));       
 console.log(trie.search("car"));       
 console.log(trie.startsWith("ca"));    
-console.log(trie.startsWith("dog"));   
+console.log(trie.startsWith("d"));   

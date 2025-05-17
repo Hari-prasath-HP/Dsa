@@ -82,6 +82,32 @@ class Binarysearchtree{
         if(!root)return 0
         return root.value + this.sum(root.left) + this.sum(root.right)
     }
+
+    bfs(){
+        let result = []
+        let queue = []
+        if(this.root)queue.push(this.root)
+        while(queue.length>0){
+            let curr = queue.shift()
+            result.push(curr.value)
+            if(curr.left)queue.push(curr.left)
+            if(curr.right)queue.push(curr.right)
+    }
+    return result;
+    }
+
+    dfs (){
+        let result = []
+        let stack = []
+        if(this.root)stack.push(this.root)
+        while(stack.length>0){
+            let curr = stack.pop()
+            result.push(curr.value)
+            if(curr.left)stack.push(curr.left)
+                if(curr.right)stack.push(curr.right)
+        }
+    return result
+    }
 }
 
 const bst = new Binarysearchtree()
@@ -97,6 +123,7 @@ console.log(bst.search(bst.root,10))
 console.log(bst.search(bst.root,5))
 console.log(bst.search(bst.root,15))
 bst.proorder(bst.root)
-bst.inorder(bst.root)
-bst.postorder(bst.root)
-console.log(bst.sum(bst.root))
+// bst.inorder(bst.root)
+// bst.postorder(bst.root)
+// console.log(bst.sum(bst.root))
+console.log(bst.sum())

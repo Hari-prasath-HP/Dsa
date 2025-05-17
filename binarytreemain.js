@@ -38,6 +38,15 @@ class Binarytree{
             }
         }
     }
+
+    height(node = this.root){
+        if(node === null){
+            return -1
+        }
+        let left = this.height(node.left)
+        let right = this.height(node.right)
+        return 1 + Math.max(left,right)
+    }
 }
 
 const bt = new Binarytree()
@@ -45,5 +54,7 @@ const bt = new Binarytree()
 bt.insert(20)
 bt.insert(45)
 bt.insert(15)
+bt.insert(5)
 console.log(bt.isEmpty())
 console.log(JSON.stringify(bt.root, null, 2));
+console.log(bt.height())
