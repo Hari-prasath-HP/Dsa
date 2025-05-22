@@ -17,7 +17,7 @@ class Graph{
             this.addvertex(vertex2)
         }
         this.adjacencylist[vertex1].add(vertex2)
-        this.adjacencylist[vertex2].add(vertex1)
+        // this.adjacencylist[vertex2].add(vertex1)
     }
 
     hasEdge(vertex1,vertex2){
@@ -78,6 +78,18 @@ class Graph{
         for(let vertex in this.adjacencylist){
             console.log(vertex + "->" + [...this.adjacencylist[vertex]])
         }
+    }
+
+    reverse() {
+        const reversedGraph = new DirectedGraph();
+
+        for (let vertex in this.adjacencylist) {
+            for (let neighbor of this.adjacencylist[vertex]) {
+                reversedGraph.addEdge(neighbor, vertex); // reverse direction
+            }
+        }
+
+        return reversedGraph;
     }
 }
 

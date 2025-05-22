@@ -42,6 +42,27 @@ class Trie {
     }
     return true;
   }
+
+  suggest(prefix){
+    let current = this.root;
+    for(let char of prefix){
+      if(!current.children[char]){
+        return[];
+      }
+      current = current.children[char];
+    }
+    let suggestion = []
+    let dfs = (node,path)=>{
+      if(node.isEndOfWord){
+      suggestion.push(path)
+      }
+        for(let char in node.children){
+          dfs(node.children[char],path+char)
+        }
+    }
+    dfs(current,prefix)
+    return suggestion
+  }
 }
 const trie = new Trie();
 
@@ -52,4 +73,5 @@ trie.insert("cap");
 console.log(trie.search("cat"));       
 console.log(trie.search("car"));       
 console.log(trie.startsWith("ca"));    
-console.log(trie.startsWith("d"));   
+console.log(trie.startsWith("d"));  
+console.log(trie.suggest("ca"))
