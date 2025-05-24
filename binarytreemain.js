@@ -24,7 +24,7 @@ class Binarytree{
         let queue = [this.root];
         while(queue.length){
             let curr = queue.shift()
-            if(!curr.left){
+            if(!curr.left){ 
                 curr.left = node;
                 return
             }else {

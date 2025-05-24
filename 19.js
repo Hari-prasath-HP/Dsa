@@ -1,69 +1,41 @@
-class Node{
-    constructor(value){
-        this.value = value;
-        this.left = null;
-        this.right = null;
-    }
-}
-
-class Bst{
+class node{
     constructor(){
-        this.root = null;
-    }
-
-    isempty(){
-        return this.root == null;
-    }
-
-    insert(value){
-        let node = new Node(value)
-        if(this.isempty()){
-            this.root = node;
-        }else this.insertnode(this.root,node)
-    }
-
-    insertnode(root,node){
-        if(node.value<root.value){
-            if(!root.left){
-                root.left = node;
-            }else this.insertnode(root.left,node)
-        }else{
-            if(!root.right){
-                root.right = node;
-            }else this.insertnode(root.right,node)
-        }
-    }
-
-    search(root,value){
-        if(!root){
-            return false
-        }else{
-            if(root.value === value){
-                return true
-            }else if(value<root.value){
-                this.search(root.left,value)
-            }else this.search(root.right,value)
-        }
-    }
-
-    largest(k){
-        let values = []
-        function inorder(node){
-            if(!node)return
-            inorder(node.left)
-            values.push(node.value)
-            inorder(node.right)
-        }
-        inorder(this.root)
-        return values[values.length-k]
+        this.children = {}
+        this.isend = false;
     }
 }
 
-const bst = new Bst()
+class Trie{
+    constructor(){
+        this.root = new Node()
+    }
 
-bst.insert(25)
-bst.insert(15)
-bst.insert(35)
-bst.insert(10)
-bst.insert(55)
-console.log(bst.largest(2))
+    insert(word){
+        let current = this.root;
+        for(let char of word){
+            if(!current.children[char]){
+                current.children[char] = new Node()
+            }current = current.children[char]
+        }
+        current.isend = true;
+    }
+    suggest(word){
+        let current = this.root
+        for(let char of word){
+            if(!current.children){
+                return []
+            }current = current.children[char]
+        }
+        let suggestions = []
+        let dfs = (node,path) =>{
+            if(node.isend){
+                suggestions.push(path)
+            }
+            for(let char in node.children){
+                dfs(node.children[char],path+char)
+            }
+        }
+        dfs(current,word)
+        return suggestions
+    }
+}
