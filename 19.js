@@ -1,70 +1,69 @@
-class Heap{
+class Node{
+    constructor(value){
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Bst{
     constructor(){
-        this.data = []
+        this.root = null;
     }
-    getparent(i){
-        return Math.floor((i-1)/2)
+
+    isempty(){
+        return this.root == null;
     }
-    getleft(i){
-        return i*2+1
+
+    insert(value){
+        let node = new Node(value)
+        if(this.isempty()){
+            this.root = node;
+        }else this.insertnode(this.root,node)
     }
-    getright(i){
-        return i*2+2
-    }
-    swap(i1,i2){
-        let temp = this.data[i1]
-        this.data[i1] = this.data[i2]
-        this.data[i2] = temp
-    }
-    push(key){
-        this.data[this.data.length] = key;
-        this.heapifyup()
-    }
-    heapifyup(){
-        let current = this.data.length-1;
-        while(this.data[current] < this.data[this.getparent(current)]){
-            this.swap(current,this.getparent(current))
-            current = this.getparent(current)
+
+    insertnode(root,node){
+        if(node.value<root.value){
+            if(!root.left){
+                root.left = node;
+            }else this.insertnode(root.left,node)
+        }else{
+            if(!root.right){
+                root.right = node;
+            }else this.insertnode(root.right,node)
         }
     }
-    buildHeap(arr){
-        this.data = arr;
-        for(let i=Math.floor(this.data.length/2)-1;i>=0;i--){
-            this.heapifydown(i)
+
+    search(root,value){
+        if(!root){
+            return false
+        }else{
+            if(root.value === value){
+                return true
+            }else if(value<root.value){
+                this.search(root.left,value)
+            }else this.search(root.right,value)
         }
     }
-    heapifydown(i){
-        let largest = i;
-        let left = this.getleft(i)
-        let right = this.getright(i)
-        if(left < this.data.length && this.data[left]<this.data[largest]){
-            largest = left;
+
+    largest(k){
+        let values = []
+        function inorder(node){
+            if(!node)return
+            inorder(node.left)
+            values.push(node.value)
+            inorder(node.right)
         }
-        if(right < this.data.length && this.data[right]<this.data[largest]){
-            largest = right;
-        }
-        if(largest!==i){
-            this.swap(i,largest);
-            this.heapifydown(largest)
-        }
-    }
-    pop(){
-        if(this.data.length == 0) return null;
-        let max = this.data[0];
-        this.data[0] = this.data[this.data.length-1];
-        this.data.pop()
-        this.heapifydown(0);
-        return max
+        inorder(this.root)
+        return values[values.length-k]
     }
 }
-let heap = new Heap();
-heap.push(40)
-heap.push(20)
-heap.push(50)
-heap.push(10)
-console.log(heap.data)
-let sorted = []
-while(heap.data.length > 0){
-    sorted.push(heap.pop())
-}
-console.log(sorted)
+
+const bst = new Bst()
+
+bst.insert(25)
+bst.insert(15)
+bst.insert(35)
+bst.insert(10)
+bst.insert(55)
+console.log(bst.largest(2))
