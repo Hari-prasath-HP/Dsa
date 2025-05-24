@@ -1,4 +1,4 @@
-class node{
+class Node{
     constructor(){
         this.children = {}
         this.isend = false;
@@ -39,3 +39,11 @@ class Trie{
         return suggestions
     }
 }
+
+const trie = new Trie();
+
+trie.insert("cat");
+trie.insert("can");
+trie.insert("cap");
+trie.insert("cold")
+console.log(trie.suggest("c"))
