@@ -108,6 +108,17 @@ class Binarysearchtree{
         }
     return result
     }
+
+    countleft(root){
+        if(!root) return 0;
+        let count = 0;
+        if(root.left){
+            count +=1;
+            count += this.countleft(root.left);
+        }
+        count += this.countleft(root.right)
+        return count
+    }
 }
 
 const bst = new Binarysearchtree()
@@ -127,3 +138,4 @@ bst.proorder(bst.root)
 // bst.postorder(bst.root)
 // console.log(bst.sum(bst.root))
 console.log(bst.sum())
+console.log(bst.countleft(bst.root))
