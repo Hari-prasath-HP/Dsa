@@ -66,6 +66,8 @@ class Trie {
 }
 const trie = new Trie();
 
+
+
 trie.insert("cat");
 trie.insert("can");
 trie.insert("cap");
