@@ -81,7 +81,7 @@ class Graph{
     }
 
     reverse() {
-        const reversedGraph = new DirectedGraph();
+        const reversedGraph = new Graph();
 
         for (let vertex in this.adjacencylist) {
             for (let neighbor of this.adjacencylist[vertex]) {
@@ -102,10 +102,13 @@ graph.addEdge("A","B")
 graph.addEdge("A","C")
 graph.addEdge("B","D")
 graph.display()
-console.log(graph.hasEdge("A","B"))
+// console.log(graph.hasEdge("A","B"))
 // graph.removeedge("A","B")
 graph.display()
 // graph.removeVertex("A")
 graph.display()
 graph.dfs("A")
 graph.bfs("A")
+
+let a = graph.reverse()
+console.log(a)
