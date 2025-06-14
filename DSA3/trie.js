@@ -1,79 +1,76 @@
-class TrieNode {
-  constructor() {
-    this.children = {};           
-    this.isEndOfWord = false;    
-  }
+class Node{
+    constructor(){
+        this.children = {}
+        this.isend = false
+    }
 }
-
-class Trie {
-  constructor() {
-    this.root = new TrieNode();
-  }
-
-  insert(word) {
-    let current = this.root;
-    for (let char of word) {
-      if (!current.children[char]) {
-        current.children[char] = new TrieNode();
-      }
-      current = current.children[char];
+class Trie{
+    constructor(){
+        this.root = new Node()
     }
-    current.isEndOfWord = true;
-  }
-
-  search(word) {                                                  
-    let current = this.root;
-    for (let char of word) {
-      if (!current.children[char]) {
-        return false;
-      }
-      current = current.children[char];
+    insert(word){
+        let current = this.root
+        for(let char of word){
+            if(!current.children[char]){
+                current.children[char] = new Node()
+            }current = current.children[char]
+        }current.isend = true
     }
-    return current.isEndOfWord;
-  }
-
-  startsWith(prefix) {
-    let current = this.root;
-    for (let char of prefix) {
-      if (!current.children[char]) {
-        return false;
-      }
-      current = current.children[char];
+    search(word){
+        let current = this.root
+        for(let char of word){
+            if(!current.children[char]){
+                return false
+            }current = current.children[char]
+        }return current.isend
     }
-    return true;
-  }
-
-  suggest(prefix){
-    let current = this.root;
-    for(let char of prefix){
-      if(!current.children[char]){
-        return[];
-      }
-      current = current.children[char];
-    }
-    let suggestion = []
-    let dfs = (node,path)=>{
-      if(node.isEndOfWord){
-      suggestion.push(path)
-      }
-        for(let char in node.children){
-          dfs(node.children[char],path+char)
+    suggest(word){
+        let current = this.root
+        for(let char of word){
+            if(!current.children[char]){
+                return []
+            }current = current.children[char]
         }
+        let suggestion = []
+        let dfs = (node,word) =>{
+            if(node.isend){
+                suggestion.push(word)
+            }
+            for(let char in node.children){
+                dfs(node.children[char],word+char)
+            }
+        }
+        dfs(current,word)
+        return suggestion
     }
-    dfs(current,prefix)
-    return suggestion
-  }
+    longestprefix(word){
+        let curr = this.root
+        let prefix = ''
+        for(let char of word){
+            if(curr.children[char]){
+                prefix+=char
+                curr = curr.children[char]
+            }else break
+        }return prefix
+    }
+    commonprefix(){
+        let curr = this.root
+        let prefix = ''
+        while(true){
+            let keys = Object.keys(curr.children)
+            if(keys.length == 1 && !curr.isend){
+                prefix+=keys[0]
+                curr = curr.children[keys[0]]
+            }else break
+        }return prefix
+    }
 }
-const trie = new Trie();
 
-
-
-trie.insert("cat");
-trie.insert("can");
-trie.insert("cap");
-
-console.log(trie.search("cat"));       
-console.log(trie.search("car"));       
-console.log(trie.startsWith("ca"));    
-console.log(trie.startsWith("d"));  
-console.log(trie.suggest("ca"))
+let trie = new Trie()
+trie.insert("cat")
+trie.insert("cap")
+trie.insert("cart")
+console.log(trie.search("cat"))
+console.log(trie.suggest("c"))
+console.log(trie.longestprefix("cartle"))
+console.log(trie.commonprefix())
