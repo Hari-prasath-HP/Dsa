@@ -1,141 +1,187 @@
 class Node{
     constructor(value){
-        this.value = value;
-        this.left = null;
-        this.right = null;
+        this.value = value
+        this.left = null
+        this.right = null
     }
 }
-
-class Binarysearchtree{
+class Bst{
     constructor(){
-        this.root = null;
+        this.root = null
     }
-
     isEmpty(){
-        return this.root == null
+        return this.root === null
     }
-
-    insert(value){      
-        const node = new Node(value);
+    insert(value){
+        let node = new Node(value)
         if(this.isEmpty()){
-            this.root = node;
-        }else {
-            this.insertnode(this.root,node)
-        }
-    }
-
-    insertnode(root,node){
-        if(node.value<root.value){
-            if(root.left == null){
-                root.left = node
-            }else{
-                this.insertnode(root.left,node)
-            }
+            this.root = node
         }else{
-            if(root.right == null){
+            this.insertNode(this.root,node)
+        }
+    }
+    insertNode(root,node){
+        if(node.value < root.value){
+            if(root.left === null){
+                root.left = node
+            }else this.insertNode(root.left,node)
+        }else{
+            if(root.right === null){
                 root.right = node
-            }else{
-                this.insertnode(root.right,node)
+            }else this.insertNode(root.right,node)
+        }
+    }
+    largest(k){
+        let count = 0
+        let result = null
+        function reverse(node){
+            if(!node || count >=k)return
+            reverse(node.right)
+            count++
+            if(count === k){
+                result = node.value
+                return
             }
+            reverse(node.left)
         }
+        reverse(this.root)
+        return result
     }
-
-    search(root,value){
-        if(!root){
-            return false;
-        }else {
-            if(root.value === value){
-                return true;
-            }else if(value < root.value){
-                return this.search(root.left , value)
-            }else{
-                return this.search(root.right,value)
+    smallest(k){
+        let count = 0
+        let result = null
+        function reverse(node){
+            if(!node || count >=k){
+                return 
             }
+            reverse(node.left)
+            count++
+            if(count === k){
+                result = node.value
+                return
+            }
+            reverse(node.right)
         }
+        reverse(this.root)
+        return result
     }
-
-    proorder(root){
-        if(root){
-            console.log(root.value);
-            this.proorder(root.left)
-            this.proorder(root.right)
+    countleft(root = this.root){
+        let count = 0
+        if(!root)return 0
+        if(root.left){
+            count+=1
+            count+=this.countleft(root.left)
         }
+        count+=this.countleft(root.right)
+        return count
     }
-
-    inorder(root){
-        if(root){
-            this.inorder(root.left)
-            console.log(root.value)
-            this.inorder(root.right)
-        }
+    height(root = this.root){
+        if(!root)return -1
+        let left = this.height(root.left)
+        let right = this.height(root.right)
+        return 1 + Math.max(left,right)
     }
-
-    postorder(root){
-        if(root){
-            this.postorder(root.left)
-            this.postorder(root.right)
-            console.log(root.value)
-        }
-    }
-
-    sum(root){
+    sum(root = this.root){
         if(!root)return 0
         return root.value + this.sum(root.left) + this.sum(root.right)
     }
-
     bfs(){
         let result = []
         let queue = []
         if(this.root)queue.push(this.root)
-        while(queue.length>0){
-            let curr = queue.shift()
-            result.push(curr.value)
-            if(curr.left)queue.push(curr.left)
-            if(curr.right)queue.push(curr.right)
+        while(queue.length){
+        let levelsize = queue.length
+        let level = []
+        for(let i=0;i<levelsize;i++){
+            let node = queue.shift()
+            level.push(node.value)
+            if(node.left)queue.push(node.left)
+            if(node.right)queue.push(node.right)
+        }result.push(level)
+        }return result
     }
-    return result;
-    }
-
-    dfs (){
+    dfs(){
         let result = []
         let stack = []
         if(this.root)stack.push(this.root)
-        while(stack.length>0){
-            let curr = stack.pop()
-            result.push(curr.value)
-            if(curr.left)stack.push(curr.left)
-                if(curr.right)stack.push(curr.right)
-        }
-    return result
+        while(stack.length){
+            let node = stack.pop()
+            result.push(node.value)
+            if(node.right)stack.push(node.right)
+            if(node.left)stack.push(node.left)
+        }return result
     }
-
-    countleft(root){
-        if(!root) return 0;
-        let count = 0;
-        if(root.left){
-            count +=1;
-            count += this.countleft(root.left);
-        }
-        count += this.countleft(root.right)
+    countleftsubnodes(root = this.root.left){
+        if(!root)return 0
+        let count = 1
+        count+=this.countleftsubnodes(root.left)
+        count+=this.countleftsubnodes(root.right)
         return count
+    }
+    delete(value){
+        this.root = this.deleteValue(this.root,value)
+    }
+    deleteValue(root,value){
+        if(!root)return null
+        if(value < root.value){
+            root.left = this.deleteValue(root.left,value)
+        }else if(value > root.value){
+            root.right = this.deleteValue(root.right,value)
+        }else{
+            if(!root.left && !root.right){
+                return null
+            }
+            if(!root.left){
+                return root.right
+            }
+            if(!root.right){
+                return root.left
+            }
+            let minnode = this.findmin(root.right)
+            root.value = minnode.value
+            root.right = this.deleteValue(root.right,minnode.value)  
+        }return root
+    }
+    findmin(node){
+        while(node.left){
+            node = node.left
+        }return node
+    }
+    isBst(root,min = -Infinity,max = Infinity){
+        if(!root)return true
+        if(root.value<=min ||  root.value >= max)return false
+        return this.isBst(root.left,min,root.value) &&
+        this.isBst(root.right,root.value,max)
+    }
+    isBalanced(root = this.root){
+        let check = (node) => {
+            if(!node) return 0
+            let left = check(node.left)
+            if(left === -1)return -1
+            let right = check(node.right)
+            if(right === -1)return -1
+            if(Math.abs(left-right)>1)return -1
+            return 1 + Math.max(left,right)
+        }
+        return check(root) !== -1
     }
 }
 
-const bst = new Binarysearchtree()
-console.log(bst.isEmpty())
-
-bst.insert(10)
-bst.insert(5)
-bst.insert(15)
-bst.insert(7)
-bst.insert(3)
-
-// console.log(bst.search(bst.root,10))
-// console.log(bst.search(bst.root,5))
-// console.log(bst.search(bst.root,15))
-bst.proorder(bst.root)
-bst.inorder(bst.root)
-bst.inorder(bst.root)
-// console.log(bst.sum(bst.root))
-// console.log(bst.sum())
-// console.log(bst.countleft(bst.root))
+let bst = new Bst()
+bst.insert(63)
+bst.insert(41)
+bst.insert(20)
+bst.insert(82)
+console.log(JSON.stringify(bst))
+console.log(bst.largest(3))
+console.log(bst.smallest(1))
+console.log(bst.countleft())
+console.log(bst.height())
+console.log(bst.sum())
+console.log(bst.bfs())
+console.log(bst.dfs())
+console.log(bst.countleftsubnodes())
+bst.delete(20)
+console.log(JSON.stringify(bst))
+console.log(bst.isBst(bst.root))
+console.log(bst.isBalanced())
