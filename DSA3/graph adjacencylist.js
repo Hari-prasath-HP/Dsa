@@ -17,7 +17,7 @@ class Graph{
             this.addvertex(vertex2)
         }
         this.adjacencylist[vertex1].add(vertex2)
-        // this.adjacencylist[vertex2].add(vertex1)
+        this.adjacencylist[vertex2].add(vertex1)
     }
 
     hasEdge(vertex1,vertex2){
