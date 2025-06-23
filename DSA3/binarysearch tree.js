@@ -165,6 +165,37 @@ class Bst{
         }
         return check(root) !== -1
     }
+    findDuplicate(){
+        let map = new Map()
+        function inorder(node){
+            if(!node)return
+            inorder(node.left)
+            map.set(node.value,(map.get(node.value)||0)+1)
+            inorder(node.right)
+        }
+        inorder(this.root)
+        let duplicates = []
+        for(let [key,val] of map.entries()){
+            if(val > 1){
+                duplicates.push(key)
+            }
+        }return duplicates
+    }
+    deleteduplicates(){
+        let map = new Map()
+        function inorder(node){
+            if(!node)return
+            inorder(node.left)
+            map.set(node.value,(map.get(node.value)||0)+1)
+            inorder(node.right)
+        }
+        inorder(this.root)
+        for(let [key,val] of map.entries()){
+            if(val > 1){
+                this.delete(key)
+            }
+        }
+    }
 }
 
 let bst = new Bst()
@@ -172,6 +203,8 @@ bst.insert(63)
 bst.insert(41)
 bst.insert(20)
 bst.insert(82)
+bst.insert(41)
+bst.insert(20)
 console.log(JSON.stringify(bst))
 console.log(bst.largest(3))
 console.log(bst.smallest(1))
@@ -185,3 +218,6 @@ bst.delete(20)
 console.log(JSON.stringify(bst))
 console.log(bst.isBst(bst.root))
 console.log(bst.isBalanced())
+console.log(bst.findDuplicate())
+bst.deleteduplicates()
+console.log(bst.findDuplicate())
