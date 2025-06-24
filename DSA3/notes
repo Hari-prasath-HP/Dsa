@@ -1,2 +1,0 @@
-Bst use value, left, right and left < root & right > root
-bt  uses same but the insertion of value will be use queue array and insert in the left and right 
