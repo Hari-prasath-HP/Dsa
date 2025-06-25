@@ -91,6 +91,36 @@ class Graph{
 
         return reversedGraph;
     }
+    hasCycle() {
+    const visited = new Set();
+
+    const dfs = (vertex, parent) => {
+        visited.add(vertex);
+
+        for (let neighbor of this.adjacencylist[vertex]) {
+            if (!visited.has(neighbor)) {
+                if (dfs(neighbor, vertex)) {
+                    return true;
+                }
+            } else if (neighbor !== parent) {
+                return true; // Found a back-edge (cycle)
+            }
+        }
+
+        return false;
+    };
+
+    for (let vertex in this.adjacencylist) {
+        if (!visited.has(vertex)) {
+            if (dfs(vertex, null)) {
+                return true; // Found a cycle
+            }
+        }
+    }
+
+    return false; // No cycles
+}
+
 }
 
 const graph = new Graph()
