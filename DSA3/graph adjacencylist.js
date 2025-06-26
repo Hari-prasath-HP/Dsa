@@ -40,39 +40,35 @@ class Graph{
         delete this.adjacencylist[vertex]
     }
 
-    dfs(startvertex){
+    dfs(start){
         let visited = new Set()
-
-        const dfshelper = (vertex) => {
-            if(!vertex)return;
-            visited.add(vertex);
+        let dfshelper = (vertex)=>{
+            if(!vertex)return
+            visited.add(vertex)
             console.log(vertex)
-
             for(let neighbor of this.adjacencylist[vertex]){
                 if(!visited.has(neighbor)){
                     dfshelper(neighbor)
                 }
             }
         }
-        dfshelper(startvertex)
+        dfshelper(start)
+        return visited
     }
-
-    bfs(stvertex){
+    bfs(start){
         let visited = new Set()
-        let queue = [stvertex]
-        visited.add(stvertex)
-
-        while(queue.length>0){
+        let queue = [start]
+        visited.add(start)
+        while(queue.length){
             let vertex = queue.shift()
             console.log(vertex)
-
             for(let neighbor of this.adjacencylist[vertex]){
                 if(!visited.has(neighbor)){
                     visited.add(neighbor)
                     queue.push(neighbor)
                 }
             }
-        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+        }return visited
     }
     display(){
         for(let vertex in this.adjacencylist){
@@ -131,14 +127,15 @@ graph.addvertex("D")
 graph.addEdge("A","B")
 graph.addEdge("A","C")
 graph.addEdge("B","D")
-graph.display()
+// graph.display()
 // console.log(graph.hasEdge("A","B"))
 // graph.removeedge("A","B")
-graph.display()
-// graph.removeVertex("A")
-graph.display()
+// graph.display()
+// // graph.removeVertex("A")
+// graph.display()
 graph.dfs("A")
-graph.bfs("A")
+// graph.bfs("A")
 
-let a = graph.reverse()
-console.log(a)
+// let a = graph.reverse()
+// console.log(a)
+// console.log(graph)

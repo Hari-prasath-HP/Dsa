@@ -196,28 +196,54 @@ class Bst{
             }
         }
     }
+
+    checksubtree(root1,root2){
+        if(!root1)return false
+        if(!root2)return false
+        if(root1.value===root2.value){
+            return true
+        }if(root1.value<root2.value){
+
+        }
+    }
 }
 
-let bst = new Bst()
-bst.insert(63)
-bst.insert(41)
-bst.insert(20)
-bst.insert(82)
-bst.insert(41)
-bst.insert(20)
-console.log(JSON.stringify(bst))
-console.log(bst.largest(3))
-console.log(bst.smallest(1))
-console.log(bst.countleft())
-console.log(bst.height())
-console.log(bst.sum())
-console.log(bst.bfs())
-console.log(bst.dfs())
-console.log(bst.countleftsubnodes())
-bst.delete(20)
-console.log(JSON.stringify(bst))
-console.log(bst.isBst(bst.root))
-console.log(bst.isBalanced())
-console.log(bst.findDuplicate())
-bst.deleteduplicates()
-console.log(bst.findDuplicate())
+// let bst = new Bst()
+// bst.insert(63)
+// bst.insert(41)
+// bst.insert(20)
+// bst.insert(82)
+// bst.insert(41)
+// bst.insert(20)
+// console.log(JSON.stringify(bst))
+// console.log(bst.largest(3))
+// console.log(bst.smallest(1))
+// console.log(bst.countleft())
+// console.log(bst.height())
+// console.log(bst.sum())
+// console.log(bst.bfs())
+// console.log(bst.dfs())
+// console.log(bst.countleftsubnodes())
+// bst.delete(20)
+// console.log(JSON.stringify(bst))
+// console.log(bst.isBst(bst.root))
+// console.log(bst.isBalanced())
+// console.log(bst.findDuplicate())
+// bst.deleteduplicates()
+// console.log(bst.findDuplicate())
+
+let bsta = new Bst()
+bsta.insert(42)
+bsta.insert(25)
+bsta.insert(32)
+bsta.insert(17)
+bsta.insert(16)
+bsta.insert(47)
+bsta.insert(45)
+bsta.insert(51)
+bsta.insert(60)
+
+let bstb = new Bst()
+bstb.insert(51)
+bstb.insert(60)
+
